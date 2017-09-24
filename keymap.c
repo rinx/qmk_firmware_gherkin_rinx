@@ -37,7 +37,8 @@ extern keymap_config_t keymap_config;
 
 // TAP DANCE
 enum {
-    TD_Q_TAB = 0
+    TD_Q_TAB = 0,
+    TD_BS_ESC
 }
 
 enum custom_keycodes {
@@ -63,15 +64,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Ctrl |  GUI |  Alt | Shift|      |      | Shift|  Alt |  GUI | Ctrl |
  * |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+-------------+------+------+------+------|
- * | Raise|      |      |      |      |      |      |      |      | Lower|
- * |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  | Enter|
+ * | Raise|      |      |      |      |      |      |      |TD_ESC| Lower|
+ * |   Z  |   X  |   C  |   V  |   B  |   N  |   M  | Space|  BS  | Enter|
  * `---------------------------------------------------------------------'
  */
 [_QWERTY] = KEYMAP( \
   TD(TD_Q_TAB), KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
   CTL_T(KC_A), GUI_T(KC_S), ALT_T(KC_D), SFT_T(KC_F), KC_G, \
   KC_H, SFT_T(KC_J), ALT_T(KC_K), GUI_T(KC_L), CTL_T(KC_SCLN), \
-  LT(_RAISE, KC_Z), KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, LT(_LOWER, KC_ENT), \
+  LT(_RAISE, KC_Z), KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_SPC, TD(TD_BS_ESC), LT(_LOWER, KC_ENT), \
 ),
 
 /* Lower
@@ -83,13 +84,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |   _  |   +  |   {  |   }  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |  BS  | Space|      |   ,  |   .  |      |
  * `---------------------------------------------------------------------'
  */
 [_LOWER] = KEYMAP( \
   KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
   _______, _______, _______, _______, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, KC_BSPC, KC_SPC, _______, KC_COMM, KC_DOT, _______, \
 ),
 
 /* Raise
@@ -101,13 +102,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |   -  |   =  |   [  |   ]  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |  BS  | Space|      |   ,  |   .  |      |
  * `---------------------------------------------------------------------'
  */
 [_RAISE] = KEYMAP( \
   KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, \
   _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, KC_BSPC, KC_SPC, _______, KC_COMM, KC_DOT, _______, \
 ),
 
 /* Funct
@@ -220,7 +221,8 @@ void matrix_scan_user(void) {
 
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_Q_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_TAB)
+  [TD_Q_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_TAB),
+  [TD_BS_ESC]  = ACTION_TAP_DANCE_DOUBLE(KC_BSPC, KC_ESC)
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
