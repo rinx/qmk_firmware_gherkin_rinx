@@ -230,6 +230,11 @@ void persistant_default_layer_set(uint16_t default_layer) {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  if (!process_record_dynamic_macro(keycode, record)) {
+    return false;
+  }
+
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
@@ -287,12 +292,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case BACKLIT:
       if (record->event.pressed) {
-        register_code(KC_RSFT);
         #ifdef BACKLIGHT_ENABLE
           backlight_step();
         #endif
-      } else {
-        unregister_code(KC_RSFT);
       }
       return false;
       break;
