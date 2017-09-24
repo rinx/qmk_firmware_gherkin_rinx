@@ -2,15 +2,34 @@
 #include "action_layer.h"
 #include "eeconfig.h"
 
+#define RKEYMAP( \
+	 K00,   K01,   K02,   K03,   K04,   K05,   K10,   K11,   K12,   K13 , \
+	 K14,   K15,   K20,   K21,   K22,   K23,   K24,   K25,   K30,   K31 , \
+	 K32,   K33,   K34,   K35,   K40,   K41,   K42,   K43,   K44,   K45   \
+) { \
+	{ K45,   K44,   K43,   K42,   K41,   K40 }, \
+	{ K35,   K34,   K33,   K32,   K31,   K30 }, \
+	{ K25,   K24,   K23,   K22,   K21,   K20 }, \
+	{ K15,   K14,   K13,   K12,   K11,   K10 }, \
+	{ K05,   K04,   K03,   K02,   K01,   K00 }  \
+}
+
 extern keymap_config_t keymap_config;
 
 #define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _FUNCT 3
-#define _NUMPAD 4
-#define _ADJUST 5
-#define _ADMINI 6
+#define _RQWERTY 1
+#define _LOWER 2
+#define _RLOWER 3
+#define _RAISE 4
+#define _RRAISE 5
+#define _FUNCT 6
+#define _RFUNCT 7
+#define _NUMPAD 8
+#define _RNUMPAD 9
+#define _ADJUST 10
+#define _RADJUST 11
+#define _ADMINI 12
+#define _RADMINI 13
 
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
@@ -43,12 +62,19 @@ enum {
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
+  RQWERTY,
   LOWER,
+  RLOWER,
   RAISE,
+  RRAISE,
   FUNCT,
+  RFUNCT,
   NUMPAD,
+  RNUMPAD,
   ADJUST,
+  RADJUST,
   ADMINI,
+  RADMINI,
   BACKLIT,
   DYNAMIC_MACRO_RANGE
 };
@@ -75,6 +101,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   LT(_FUNCT, KC_Z), SFT_T(KC_X), ALT_T(KC_C), GUI_T(KC_V), LT(_LOWER, KC_SPC), \
   LT(_RAISE, KC_BSPC), GUI_T(KC_B), ALT_T(KC_N), SFT_T(KC_M), LT(_NUMPAD, KC_ENT) \
 ),
+[_RQWERTY] = RKEYMAP( \
+  TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
+  CTL_T(KC_A), KC_S, KC_D, KC_F, KC_G, \
+  KC_H, KC_J, KC_K, KC_L, KC_SCLN, \
+  LT(_RFUNCT, KC_Z), SFT_T(KC_X), ALT_T(KC_C), GUI_T(KC_V), LT(_RLOWER, KC_SPC), \
+  LT(_RRAISE, KC_BSPC), GUI_T(KC_B), ALT_T(KC_N), SFT_T(KC_M), LT(_RNUMPAD, KC_ENT) \
+),
 
 /* Lower
  * ,---------------------------------------------------------------------.
@@ -89,6 +122,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `---------------------------------------------------------------------'
  */
 [_LOWER] = KEYMAP( \
+  KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
+  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  _______, _______, _______, _______, _______, _______, KC_DQUO, KC_COMM, KC_DOT, _______ \
+),
+[_RLOWER] = RKEYMAP( \
   KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
   _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
   _______, _______, _______, _______, _______, _______, KC_DQUO, KC_COMM, KC_DOT, _______ \
@@ -111,6 +149,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
   _______, _______, _______, _______, _______, _______, KC_QUOT, KC_COMM, KC_DOT, _______ \
 ),
+[_RRAISE] = RKEYMAP( \
+  KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, \
+  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
+  _______, _______, _______, _______, _______, _______, KC_QUOT, KC_COMM, KC_DOT, _______ \
+),
 
 /* Funct
  * ,---------------------------------------------------------------------.
@@ -121,13 +164,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |M C/P |M COPY|MPASTE|      |      |DMPLY1|DMREC1|  F11 |  F12 |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |DMPLY2|DMREC2|DMSTOP|      |
+ * |      |      |      |      |      |      |DMPLY2|DMREC2|DMSTOP|ADMINI|
  * `---------------------------------------------------------------------'
  */
 [_FUNCT] = KEYMAP( \
   KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
   _______, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
-  _______, _______, _______, _______, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, DYN_REC_STOP, _______ \
+  _______, _______, _______, _______, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, DYN_REC_STOP, ADMINI \
+),
+[_RFUNCT] = RKEYMAP( \
+  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
+  _______, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
+  _______, _______, _______, _______, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, DYN_REC_STOP, RADMINI \
 ),
 
 /* Numpad
@@ -145,6 +193,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NUMPAD] = KEYMAP( \
   _______, KC_7, KC_8, KC_9, _______, _______, _______, KC_UP, _______, _______, \
   ADJUST, KC_4, KC_5, KC_6, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, \
+  KC_0, KC_1, KC_2, KC_3, _______, _______, _______, _______, _______, _______ \
+),
+[_RNUMPAD] = RKEYMAP( \
+  _______, KC_7, KC_8, KC_9, _______, _______, _______, KC_UP, _______, _______, \
+  RADJUST, KC_4, KC_5, KC_6, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, \
   KC_0, KC_1, KC_2, KC_3, _______, _______, _______, _______, _______, _______ \
 ),
 
@@ -165,6 +218,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, \
   _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN1, KC_BTN2, _______, _______, _______ \
 ),
+[_RADJUST] = RKEYMAP( \
+  _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, \
+  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, \
+  _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN1, KC_BTN2, _______, _______, _______ \
+),
 
 /* Admini
  * ,---------------------------------------------------------------------.
@@ -179,7 +237,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `---------------------------------------------------------------------'
  */
 [_ADMINI] = KEYMAP( \
-  RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  RESET, _______, _______, _______, _______, _______, _______, _______, _______, RQWERTY, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
+),
+[_RADMINI] = RKEYMAP( \
+  RESET, _______, _______, _______, _______, _______, _______, _______, _______, QWERTY, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
 )
@@ -244,11 +307,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case RQWERTY:
+      if (record->event.pressed) {
+        persistant_default_layer_set(1UL<<_RQWERTY);
+      }
+      return false;
+      break;
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
       } else {
         layer_off(_LOWER);
+      }
+      return false;
+      break;
+    case RLOWER:
+      if (record->event.pressed) {
+        layer_on(_RLOWER);
+      } else {
+        layer_off(_RLOWER);
       }
       return false;
       break;
@@ -260,11 +337,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case RRAISE:
+      if (record->event.pressed) {
+        layer_on(_RRAISE);
+      } else {
+        layer_off(_RRAISE);
+      }
+      return false;
+      break;
     case FUNCT:
       if (record->event.pressed) {
         layer_on(_FUNCT);
       } else {
         layer_off(_FUNCT);
+      }
+      return false;
+      break;
+    case RFUNCT:
+      if (record->event.pressed) {
+        layer_on(_RFUNCT);
+      } else {
+        layer_off(_RFUNCT);
       }
       return false;
       break;
@@ -276,6 +369,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case RNUMPAD:
+      if (record->event.pressed) {
+        layer_on(_RNUMPAD);
+      } else {
+        layer_off(_RNUMPAD);
+      }
+      return false;
+      break;
     case ADJUST:
       if (record->event.pressed) {
         layer_on(_ADJUST);
@@ -284,11 +385,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case RADJUST:
+      if (record->event.pressed) {
+        layer_on(_RADJUST);
+      } else {
+        layer_off(_RADJUST);
+      }
+      return false;
+      break;
     case ADMINI:
       if (record->event.pressed) {
         layer_on(_ADMINI);
       } else {
         layer_off(_ADMINI);
+      }
+      return false;
+      break;
+    case RADMINI:
+      if (record->event.pressed) {
+        layer_on(_RADMINI);
+      } else {
+        layer_off(_RADMINI);
       }
       return false;
       break;
