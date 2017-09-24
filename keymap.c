@@ -37,9 +37,8 @@ extern keymap_config_t keymap_config;
 
 // TAP DANCE
 enum {
-    TD_Q_TAB = 0,
-    TD_BS_ESC
-}
+    TD_Q_TAB = 0
+};
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -51,7 +50,7 @@ enum custom_keycodes {
   ADMINI,
   BACKLIT,
   DYNAMIC_MACRO_RANGE
-}
+};
 
 #include "dynamic_macro.h"
 
@@ -64,15 +63,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Ctrl |  GUI |  Alt | Shift|      |      | Shift|  Alt |  GUI | Ctrl |
  * |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+-------------+------+------+------+------|
- * | Raise|      |      |      |      |      |      |      |TD_ESC| Lower|
- * |   Z  |   X  |   C  |   V  |   B  |   N  |   M  | Space|  BS  | Enter|
+ * | Raise| Funct|      |      |      |      |      |      |Numpad| Lower|
+ * |   Z  |   X  |   C  |   V  |   B  |   N  |   M  | Space|  Esc | Enter|
  * `---------------------------------------------------------------------'
  */
 [_QWERTY] = KEYMAP( \
   TD(TD_Q_TAB), KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
   CTL_T(KC_A), GUI_T(KC_S), ALT_T(KC_D), SFT_T(KC_F), KC_G, \
   KC_H, SFT_T(KC_J), ALT_T(KC_K), GUI_T(KC_L), CTL_T(KC_SCLN), \
-  LT(_RAISE, KC_Z), KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_SPC, TD(TD_BS_ESC), LT(_LOWER, KC_ENT), \
+  LT(_RAISE, KC_Z), LT(_FUNCT, KC_X), KC_C, KC_V, KC_B, \
+  KC_N, KC_M, KC_SPC, LT(_NUMPAD, KC_ESC), LT(_LOWER, KC_ENT) \
 ),
 
 /* Lower
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |   _  |   +  |   {  |   }  |
+ * |      |      |      |      |SPTLGT|MSNCTL|   _  |   +  |   {  |   }  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
  * |      |      |      |      |  BS  | Space|      |   ,  |   .  |      |
@@ -89,8 +89,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = KEYMAP( \
   KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
-  _______, _______, _______, _______, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  _______, _______, _______, _______, KC_BSPC, KC_SPC, _______, KC_COMM, KC_DOT, _______, \
+  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  _______, _______, _______, _______, KC_BSPC, KC_SPC, _______, KC_COMM, KC_DOT, _______ \
 ),
 
 /* Raise
@@ -99,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |   -  |   =  |   [  |   ]  |
+ * |      |      |      |      |SPTLGT|MSNCTL|   -  |   =  |   [  |   ]  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
  * |      |      |      |      |  BS  | Space|      |   ,  |   .  |      |
@@ -107,8 +107,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = KEYMAP( \
   KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, \
-  _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
-  _______, _______, _______, _______, KC_BSPC, KC_SPC, _______, KC_COMM, KC_DOT, _______, \
+  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
+  _______, _______, _______, _______, KC_BSPC, KC_SPC, _______, KC_COMM, KC_DOT, _______ \
 ),
 
 /* Funct
@@ -117,16 +117,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |      |      |  F11 |  F12 |
+ * |      |M C/P |M COPY|MPASTE|      |      |DMPLY1|DMREC1|  F11 |  F12 |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |      |      |      |      |
+ * |Admini|      |      |      |      |      |DMPLY2|DMREC2|DMSTOP|      |
  * `---------------------------------------------------------------------'
  */
 [_FUNCT] = KEYMAP( \
   KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
-  _______, _______, _______, _______, _______, _______, _______, _______, KC_F11,  KC_F12, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
+  ADMINI, _______, _______, _______, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, DYN_REC_STOP, _______ \
 ),
 
 /* Numpad
@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NUMPAD] = KEYMAP( \
   _______, KC_7, KC_8, KC_9, _______, _______, _______, KC_UP, _______, _______, \
   _______, KC_4, KC_5, KC_6, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, \
-  KC_0, KC_1, KC_2, KC_3, _______, _______, _______, _______, _______, _______, \
+  KC_0, KC_1, KC_2, KC_3, _______, _______, _______, _______, _______, _______ \
 ),
 
 /* Adjust
@@ -162,13 +162,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = KEYMAP( \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
 ),
 
 /* Admini
  * ,---------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |      |      |      |      |
+ * | Reset|      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
  * |      |      |      |      |      |      |      |      |      |      |
@@ -178,9 +178,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `---------------------------------------------------------------------'
  */
 [_ADMINI] = KEYMAP( \
+  RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
 )
 
 };
@@ -214,31 +214,74 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 };
 
 void matrix_init_user(void) {
-}
+};
 
 void matrix_scan_user(void) {
-}
+};
 
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_Q_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_TAB),
-  [TD_BS_ESC]  = ACTION_TAP_DANCE_DOUBLE(KC_BSPC, KC_ESC)
+  [TD_Q_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_TAB)
 };
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-	return true;
-}
 
 void persistant_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
   default_layer_set(default_layer);
-}
+};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
         persistant_default_layer_set(1UL<<_QWERTY);
+      }
+      return false;
+      break;
+    case LOWER:
+      if (record->event.pressed) {
+        layer_on(_LOWER);
+      } else {
+        layer_off(_LOWER);
+      }
+      return false;
+      break;
+    case RAISE:
+      if (record->event.pressed) {
+        layer_on(_RAISE);
+      } else {
+        layer_off(_RAISE);
+      }
+      return false;
+      break;
+    case FUNCT:
+      if (record->event.pressed) {
+        layer_on(_FUNCT);
+      } else {
+        layer_off(_FUNCT);
+      }
+      return false;
+      break;
+    case NUMPAD:
+      if (record->event.pressed) {
+        layer_on(_NUMPAD);
+      } else {
+        layer_off(_NUMPAD);
+      }
+      return false;
+      break;
+    case ADJUST:
+      if (record->event.pressed) {
+        layer_on(_ADJUST);
+      } else {
+        layer_off(_ADJUST);
+      }
+      return false;
+      break;
+    case ADMINI:
+      if (record->event.pressed) {
+        layer_on(_ADMINI);
+      } else {
+        layer_off(_ADMINI);
       }
       return false;
       break;
@@ -255,7 +298,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     }
     return true;
-}
-
-
+};
 
