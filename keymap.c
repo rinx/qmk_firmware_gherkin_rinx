@@ -57,7 +57,9 @@ extern keymap_config_t keymap_config;
 // TAP DANCE
 enum {
     TD_Q_ESC = 0,
-    TD_W_TAB = 1
+    TD_W_TAB = 1,
+    TD_P_SPL = 2,
+    TD_O_MSN = 3
 };
 
 enum custom_keycodes {
@@ -84,29 +86,29 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Qwerty
  * ,---------------------------------------------------------------------.
- * |TD_ESC|TD_TAB|      |      |      |      |      |      |      |      |
+ * |TD_ESC|TD_TAB|      |      |      |      |      |      |MSNCTL|SPTLGT|
  * |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |
  * |------+------+------+------+-------------+------+------+------+------|
  * | Ctrl |      |      |      |      |      |      |      |      | Ctrl |
  * |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+-------------+------+------+------+------|
- * | Funct| Shift|  Alt |  GUI | Lower| Raise|  GUI |  Alt | Shift|Numpad|
+ * | Shift|  Alt |  GUI | Funct| Lower| Raise|Numpad|  GUI |  Alt | Shift|
  * |   Z  |   X  |   C  |   V  | Space|  BS  |   B  |   N  |   M  | Enter|
  * `---------------------------------------------------------------------'
  */
 [_QWERTY] = KEYMAP( \
-  TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
+  TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, TD(TD_O_MSN), TD(TD_P_SPL), \
   CTL_T(KC_A), KC_S, KC_D, KC_F, KC_G, \
-  KC_H, KC_J, KC_K, KC_L, KC_SCLN, \
-  LT(_FUNCT, KC_Z), SFT_T(KC_X), ALT_T(KC_C), GUI_T(KC_V), LT(_LOWER, KC_SPC), \
-  LT(_RAISE, KC_BSPC), GUI_T(KC_B), ALT_T(KC_N), SFT_T(KC_M), LT(_NUMPAD, KC_ENT) \
+  KC_H, KC_J, KC_K, KC_L, CTL_T(KC_SCLN), \
+  SFT_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C), LT(_FUNCT, KC_V), LT(_LOWER, KC_SPC), \
+  LT(_RAISE, KC_BSPC), LT(_NUMPAD, KC_B), GUI_T(KC_N), ALT_T(KC_M), SFT_T(KC_ENT) \
 ),
 [_RQWERTY] = RKEYMAP( \
-  TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
+  TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, TD(TD_O_MSN), TD(TD_P_SPL), \
   CTL_T(KC_A), KC_S, KC_D, KC_F, KC_G, \
-  KC_H, KC_J, KC_K, KC_L, KC_SCLN, \
-  LT(_RFUNCT, KC_Z), SFT_T(KC_X), ALT_T(KC_C), GUI_T(KC_V), LT(_RLOWER, KC_SPC), \
-  LT(_RRAISE, KC_BSPC), GUI_T(KC_B), ALT_T(KC_N), SFT_T(KC_M), LT(_RNUMPAD, KC_ENT) \
+  KC_H, KC_J, KC_K, KC_L, CTL_T(KC_SCLN), \
+  SFT_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C), LT(_RFUNCT, KC_V), LT(_RLOWER, KC_SPC), \
+  LT(_RRAISE, KC_BSPC), LT(_RNUMPAD, KC_B), GUI_T(KC_N), ALT_T(KC_M), SFT_T(KC_ENT) \
 ),
 
 /* Lower
@@ -115,21 +117,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |SPTLGT|MSNCTL|   _  |   +  |   {  |   }  |
+ * |   ~  |   "  |   ?  |   |  |      |      |   _  |   +  |   {  |   }  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |   "  |   ,  |   .  |      |
+ * |      |      |      |      |      |      |      |   <  |   >  |      |
  * `---------------------------------------------------------------------'
  */
 [_LOWER] = KEYMAP( \
   KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
-  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  _______, _______, _______, _______, _______, _______, KC_DQUO, KC_COMM, KC_DOT, _______ \
+  KC_TILD, KC_DQUO, KC_QUES, KC_PIPE, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  _______, _______, _______, _______, _______, _______, _______, KC_LABK, KC_RABK, _______ \
 ),
 [_RLOWER] = RKEYMAP( \
   KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
-  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
-  _______, _______, _______, _______, _______, _______, KC_DQUO, KC_COMM, KC_DOT, _______ \
+  KC_TILD, KC_DQUO, KC_QUES, KC_PIPE, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, \
+  _______, _______, _______, _______, _______, _______, _______, KC_LABK, KC_RABK, _______ \
 ),
 
 /* Raise
@@ -138,21 +140,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |SPTLGT|MSNCTL|   -  |   =  |   [  |   ]  |
+ * |   `  |   '  |   /  |   \  |      |      |   -  |   =  |   [  |   ]  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |   '  |   ,  |   .  |      |
+ * |      |      |      |      |      |      |   '  |   ,  |   .  |   \  |
  * `---------------------------------------------------------------------'
  */
 [_RAISE] = KEYMAP( \
   KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, \
-  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
-  _______, _______, _______, _______, _______, _______, KC_QUOT, KC_COMM, KC_DOT, _______ \
+  KC_GRV,  KC_QUOT, KC_SLSH, KC_BSLS, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
+  _______, _______, _______, _______, _______, _______, _______, KC_COMM, KC_DOT, _______ \
 ),
 [_RRAISE] = RKEYMAP( \
   KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, \
-  _______, _______, _______, _______, SPTLGHT, MISSIONCTL, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
-  _______, _______, _______, _______, _______, _______, KC_QUOT, KC_COMM, KC_DOT, _______ \
+  KC_GRV,  KC_QUOT, KC_SLSH, KC_BSLS, _______, _______, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, \
+  _______, _______, _______, _______, _______, _______, _______, KC_COMM, KC_DOT, _______ \
 ),
 
 /* Funct
@@ -164,18 +166,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |M C/P |M COPY|MPASTE|      |      |DMPLY1|DMREC1|  F11 |  F12 |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |DMPLY2|DMREC2|DMSTOP|ADMINI|
+ * |      |      |      |      |      |  DEL |DMPLY2|DMREC2|DMSTOP|ADMINI|
  * `---------------------------------------------------------------------'
  */
 [_FUNCT] = KEYMAP( \
   KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
   _______, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
-  _______, _______, _______, _______, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, DYN_REC_STOP, ADMINI \
+  _______, _______, _______, _______, _______, KC_DEL, DYN_MACRO_PLAY2, DYN_REC_START2, DYN_REC_STOP, ADMINI \
 ),
 [_RFUNCT] = RKEYMAP( \
   KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
   _______, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
-  _______, _______, _______, _______, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, DYN_REC_STOP, RADMINI \
+  _______, _______, _______, _______, _______, KC_DEL, DYN_MACRO_PLAY2, DYN_REC_START2, DYN_REC_STOP, RADMINI \
 ),
 
 /* Numpad
@@ -210,24 +212,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |MsLeft|MsDown|MsRght|      |      |MsLeft|MsDown|MsRght|      |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      | Lclk | Rclk | Lclk | Rclk |      |      |      |
+ * |      |      |      | Lclk | Rclk |      |      |      |      |      |
  * `---------------------------------------------------------------------'
  */
 [_ADJUST] = KEYMAP( \
   _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, \
   _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, \
-  _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN1, KC_BTN2, _______, _______, _______ \
+  _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, _______ \
 ),
 [_RADJUST] = RKEYMAP( \
   _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, \
   _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, \
-  _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN1, KC_BTN2, _______, _______, _______ \
+  _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, _______ \
 ),
 
 /* Admini
  * ,---------------------------------------------------------------------.
- * |      |      |      |      |      |      |      |      |      |      |
- * | Reset|      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |      |L/R   |
+ * | Reset|      |      |      |      |      |      |      |      |SWITCH|
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
  * |      |      |      |      |      |      |      |      |      |      |
@@ -286,7 +288,9 @@ void matrix_scan_user(void) {
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_Q_ESC]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
-  [TD_W_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_W, KC_TAB)
+  [TD_W_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_W, KC_TAB),
+  [TD_P_SPL]  = ACTION_TAP_DANCE_DOUBLE(KC_P, SPTLGHT),
+  [TD_O_MSN]  = ACTION_TAP_DANCE_DOUBLE(KC_O, MISSIONCTL)
 };
 
 void persistant_default_layer_set(uint16_t default_layer) {
