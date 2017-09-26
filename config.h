@@ -35,6 +35,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #endif
 
+#undef BACKLIGHT_LEVELS
+#define BACKLIGHT_LEVELS 4
+
 #undef MOUSEKEY_INTERVAL
 #define MOUSEKEY_INTERVAL 0
 
