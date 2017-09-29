@@ -58,8 +58,12 @@ extern keymap_config_t keymap_config;
 enum {
     TD_Q_ESC = 0,
     TD_W_TAB = 1,
-    TD_P_SPL = 2,
-    TD_O_MSN = 3
+    TD_P_SPL,
+    TD_O_MSN,
+    TD_X_ALT,
+    TD_C_GUI,
+    TD_N_GUI,
+    TD_M_ALT
 };
 
 enum custom_keycodes {
@@ -92,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Ctrl |      |      |      |      |      |      |      |      | Ctrl |
  * |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+-------------+------+------+------+------|
- * | Shift|  Alt |  GUI | Funct| Lower| Raise|Numpad|  GUI |  Alt | Shift|
+ * | Shift|TD_ALT|TD_GUI| Funct| Lower| Raise|Numpad|TD_GUI|TD_ALT| Shift|
  * |   Z  |   X  |   C  |   V  | Space|  BS  |   B  |   N  |   M  | Enter|
  * `---------------------------------------------------------------------'
  */
@@ -100,8 +104,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, TD(TD_O_MSN), TD(TD_P_SPL), \
   CTL_T(KC_A), KC_S, KC_D, KC_F, KC_G, \
   KC_H, KC_J, KC_K, KC_L, CTL_T(KC_SCLN), \
-  SFT_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C), LT(_FUNCT, KC_V), LT(_LOWER, KC_SPC), \
-  LT(_RAISE, KC_BSPC), LT(_NUMPAD, KC_B), GUI_T(KC_N), ALT_T(KC_M), SFT_T(KC_ENT) \
+  SFT_T(KC_Z), TD(TD_X_ALT), TD(TD_C_GUI), LT(_FUNCT, KC_V), LT(_LOWER, KC_SPC), \
+  LT(_RAISE, KC_BSPC), LT(_NUMPAD, KC_B), TD(TD_N_GUI), TD(TD_M_ALT), SFT_T(KC_ENT) \
 ),
 [_RQWERTY] = RKEYMAP( \
   TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, TD(TD_O_MSN), TD(TD_P_SPL), \
@@ -290,7 +294,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_Q_ESC]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
   [TD_W_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_W, KC_TAB),
   [TD_P_SPL]  = ACTION_TAP_DANCE_DOUBLE(KC_P, SPTLGHT),
-  [TD_O_MSN]  = ACTION_TAP_DANCE_DOUBLE(KC_O, MISSIONCTL)
+  [TD_O_MSN]  = ACTION_TAP_DANCE_DOUBLE(KC_O, MISSIONCTL),
+  [TD_X_ALT]  = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_LALT),
+  [TD_C_GUI]  = ACTION_TAP_DANCE_DOUBLE(KC_C, KC_LGUI),
+  [TD_N_GUI]  = ACTION_TAP_DANCE_DOUBLE(KC_N, KC_LGUI),
+  [TD_M_ALT]  = ACTION_TAP_DANCE_DOUBLE(KC_M, KC_LALT)
 };
 
 void persistant_default_layer_set(uint16_t default_layer) {
