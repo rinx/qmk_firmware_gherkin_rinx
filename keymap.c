@@ -30,6 +30,8 @@ extern keymap_config_t keymap_config;
 #define _RADJUST 11
 #define _ADMINI 12
 #define _RADMINI 13
+#define _IJIDEA 14
+#define _RIJIDEA 15
 
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
@@ -50,9 +52,22 @@ extern keymap_config_t keymap_config;
 #define NEXTAPP ACTION_MODS_KEY(MOD_LGUI, KC_TAB)
 #define PREVAPP ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_TAB)
 
+#define IDEA_O ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_O)
+#define IDEA_F ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_F)
+#define IDEA_R ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_R)
+#define IDEA_A ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_A)
+#define IDEA_BARF_BACK ACTION_MODS_KEY(MOD_LGUI |MOD_LCTL, KC_K)
+#define IDEA_BARF_FORW ACTION_MODS_KEY(MOD_LGUI |MOD_LSFT, KC_J)
+#define IDEA_SLURP_BACK ACTION_MODS_KEY(MOD_LGUI |MOD_LCTL, KC_J)
+#define IDEA_SLURP_FORW ACTION_MODS_KEY(MOD_LGUI |MOD_LSFT, KC_K)
+#define IDEA_CURSV_EVAL ACTION_MODS_KEY(MOD_LCTL |MOD_LSFT, KC_E)
+#define IDEA_CURSV_LOAD ACTION_MODS_KEY(MOD_LCTL |MOD_LSFT, KC_M)
+#define IDEA_CURSV_CHNS ACTION_MODS_KEY(MOD_LCTL |MOD_LSFT, KC_N)
+
 // macros
-#define MAC_COPY_PASTE 0
-#define WIN_COPY_PASTE 1
+#define SEND_KEYMAP_URI 0
+#define MAC_COPY_PASTE 1
+#define WIN_COPY_PASTE 2
 
 // TAP DANCE
 enum {
@@ -78,6 +93,8 @@ enum custom_keycodes {
   RADJUST,
   ADMINI,
   RADMINI,
+  IJIDEA,
+  RIJIDEA,
   BACKLIT,
   DYNAMIC_MACRO_RANGE
 };
@@ -163,8 +180,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      |      |
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * | Tab  |M C/P |M COPY|MPASTE|      |      |DMPLY1|DMREC1|  F11 |  F12 |
+ * |      |      |      |      |      |KEYMAP|      |      |      |      |
+ * | Tab  |M C/P |M COPY|MPASTE|      |   URL|DMPLY1|DMREC1|  F11 |  F12 |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
  * |      |      |      |      |      |  DEL |DMPLY2|DMREC2|DMSTOP|ADMINI|
@@ -172,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_FUNCT] = KEYMAP( \
   KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
-  KC_TAB, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, _______, DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
+  KC_TAB, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, M(SEND_KEYMAP_URI), DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
   _______, _______, _______, _______, _______, KC_DEL, DYN_MACRO_PLAY2, DYN_REC_START2, DYN_REC_STOP, ADMINI \
 ),
 [_RFUNCT] = RKEYMAP( \
@@ -229,8 +246,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Admini
  * ,---------------------------------------------------------------------.
- * |      |      |      |      |      |      |      |      |      |L/R   |
- * | Reset|      |      |      |      |      |      |      |      |SWITCH|
+ * |      |      |      |      |      |      |      |      |Intell|L/R   |
+ * | Reset|      |      |      |      |      |      |      |ijIDEA|SWITCH|
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
  * |      |      |      |      |      |      |      |      |      |      |
@@ -240,14 +257,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `---------------------------------------------------------------------'
  */
 [_ADMINI] = KEYMAP( \
-  RESET, _______, _______, _______, _______, _______, _______, _______, _______, RQWERTY, \
+  RESET, _______, _______, _______, _______, _______, _______, _______, IJIDEA, RQWERTY, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   BL_TOGG, BACKLIT, _______, _______, _______, _______, _______, _______, _______, _______ \
 ),
 [_RADMINI] = RKEYMAP( \
-  RESET, _______, _______, _______, _______, _______, _______, _______, _______, QWERTY, \
+  RESET, _______, _______, _______, _______, _______, _______, _______, RIJIDEA, QWERTY, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
   BL_TOGG, BACKLIT, _______, _______, _______, _______, _______, _______, _______, _______ \
+),
+
+/* for IntelliJ IDEA
+ * ,---------------------------------------------------------------------.
+ * |      |      |      |Cmd   |      |      |      |      |Cmd   |      |
+ * |QWERTY|      |Cmd+E |Shft+R|      |      |      |      |Shft+O|      |
+ * |------+------+------+------+-------------+------+------+------+------|
+ * |Cmd   |      |      |Cmd   |      |      |Ctrl  |      | SLURP| SLURP|
+ * |Shft+A|      |      |Shft+F|      |      |Shft+E|      |  <-( | )->  |
+ * |------+------+------+------+-------------+------+------+------+------|
+ * |      |      |      |      |      |Ctrl  |Ctrl  |      | BARF | BARF |
+ * |      |      |      |      |      |Shft+N|Shft+M|      |  <-) | (->  |
+ * `---------------------------------------------------------------------'
+ */
+[_IJIDEA] = KEYMAP( \
+  QWERTY, XXXXXXX, ACTION_MODS_KEY(MOD_LGUI, KC_E), IDEA_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_O, XXXXXXX, \
+  IDEA_A, XXXXXXX, XXXXXXX, IDEA_F, XXXXXXX, XXXXXXX, IDEA_CURSV_EVAL, XXXXXXX, IDEA_SLURP_BACK, IDEA_SLURP_FORW, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_CURSV_CHNS, IDEA_CURSV_LOAD, XXXXXXX, IDEA_BARF_BACK, IDEA_BARF_FORW \
+),
+[_RIJIDEA] = RKEYMAP( \
+  RQWERTY, XXXXXXX, ACTION_MODS_KEY(MOD_LGUI, KC_E), IDEA_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_O, XXXXXXX, \
+  IDEA_A, XXXXXXX, XXXXXXX, IDEA_F, XXXXXXX, XXXXXXX, IDEA_CURSV_EVAL, XXXXXXX, IDEA_SLURP_BACK, IDEA_SLURP_FORW, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_CURSV_CHNS, IDEA_CURSV_LOAD, XXXXXXX, IDEA_BARF_BACK, IDEA_BARF_FORW \
 )
 
 };
@@ -256,6 +296,11 @@ static uint16_t start;
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
     switch(id) {
+        case SEND_KEYMAP_URI:
+            if (record->event.pressed) {
+                SEND_STRING("https://github.com/rinx/qmk_firmware_gherkin_rinx/blob/master/keymap.c");
+            }
+            break;
         case MAC_COPY_PASTE:
             if (record->event.pressed) {
                 start = timer_read();
@@ -412,6 +457,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(_RADMINI);
       } else {
         layer_off(_RADMINI);
+      }
+      return false;
+      break;
+    case IJIDEA:
+      if (record->event.pressed) {
+        persistant_default_layer_set(1UL<<_IJIDEA);
+      }
+      return false;
+      break;
+    case RIJIDEA:
+      if (record->event.pressed) {
+        persistant_default_layer_set(1UL<<_RIJIDEA);
       }
       return false;
       break;
