@@ -43,6 +43,7 @@ extern keymap_config_t keymap_config;
 #define WINCOPY ACTION_MODS_KEY(MOD_LCTL, KC_C)
 #define WINPASTE ACTION_MODS_KEY(MOD_LCTL, KC_V)
 #define MACUNDO ACTION_MODS_KEY(MOD_LGUI, KC_Z)
+#define MACREDO ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_Z)
 #define MACCUT ACTION_MODS_KEY(MOD_LGUI, KC_X)
 #define MACCOPY ACTION_MODS_KEY(MOD_LGUI, KC_C)
 #define MACPASTE ACTION_MODS_KEY(MOD_LGUI, KC_V)
@@ -269,25 +270,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* for IntelliJ IDEA
  * ,---------------------------------------------------------------------.
- * |      |      |      |Cmd   |      |      |      |      |Cmd   |      |
- * |QWERTY|      |Cmd+E |Shft+R|      |      |      |      |Shft+O|      |
+ * |      |      |      |      |      |      |Cmd   |      |Cmd   |Cmd   |
+ * | ESC  |PREVWK|NEXTWK|PREVTB|NEXTTB|      |Shft+R|Cmd+E |Shft+O|Shft+A|
  * |------+------+------+------+-------------+------+------+------+------|
- * |Cmd   |      |      |Cmd   |      |      |Ctrl  |      | SLURP| SLURP|
- * |Shft+A|      |      |Shft+F|      |      |Shft+E|      |  <-( | )->  |
+ * |      |      |      |      |      |      |Cmd   |Ctrl  | SLURP| SLURP|
+ * |QWERTY|M COPY|MPASTE|SPTLGT|MSNCTL|      |Shft+F|Shft+E|  <-( | )->  |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |Ctrl  |Ctrl  |      | BARF | BARF |
- * |      |      |      |      |      |Shft+N|Shft+M|      |  <-) | (->  |
+ * |      |      |      |      |      |      |Ctrl  |Ctrl  | BARF | BARF |
+ * |DMSTOP|DMPLY1|DMPLY2|M UNDO|M REDO|      |Shft+N|Shft+M|  <-) | (->  |
  * `---------------------------------------------------------------------'
  */
 [_IJIDEA] = KEYMAP( \
-  QWERTY, XXXXXXX, ACTION_MODS_KEY(MOD_LGUI, KC_E), IDEA_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_O, XXXXXXX, \
-  IDEA_A, XXXXXXX, XXXXXXX, IDEA_F, XXXXXXX, XXXXXXX, IDEA_CURSV_EVAL, XXXXXXX, IDEA_SLURP_BACK, IDEA_SLURP_FORW, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_CURSV_CHNS, IDEA_CURSV_LOAD, XXXXXXX, IDEA_BARF_BACK, IDEA_BARF_FORW \
+  KC_ESC, PREVWKS, NEXTWKS, PREVTAB, NEXTTAB, XXXXXXX, IDEA_R, ACTION_MODS_KEY(MOD_LGUI, KC_E), IDEA_O, IDEA_A, \
+  QWERTY, MACCOPY, MACPASTE, SPTLGHT, MISSIONCTL, XXXXXXX, IDEA_F, IDEA_CURSV_EVAL, IDEA_SLURP_BACK, IDEA_SLURP_FORW, \
+  DYN_REC_STOP, DYN_MACRO_PLAY1, DYN_MACRO_PLAY2, MACUNDO, MACREDO, XXXXXXX, IDEA_CURSV_CHNS, IDEA_CURSV_LOAD, IDEA_BARF_BACK, IDEA_BARF_FORW \
 ),
 [_RIJIDEA] = RKEYMAP( \
-  RQWERTY, XXXXXXX, ACTION_MODS_KEY(MOD_LGUI, KC_E), IDEA_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_O, XXXXXXX, \
-  IDEA_A, XXXXXXX, XXXXXXX, IDEA_F, XXXXXXX, XXXXXXX, IDEA_CURSV_EVAL, XXXXXXX, IDEA_SLURP_BACK, IDEA_SLURP_FORW, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, IDEA_CURSV_CHNS, IDEA_CURSV_LOAD, XXXXXXX, IDEA_BARF_BACK, IDEA_BARF_FORW \
+  KC_ESC, PREVWKS, NEXTWKS, PREVTAB, NEXTTAB, XXXXXXX, IDEA_R, ACTION_MODS_KEY(MOD_LGUI, KC_E), IDEA_O, IDEA_A, \
+  RQWERTY, MACCOPY, MACPASTE, SPTLGHT, MISSIONCTL, XXXXXXX, IDEA_F, IDEA_CURSV_EVAL, IDEA_SLURP_BACK, IDEA_SLURP_FORW, \
+  DYN_REC_STOP, DYN_MACRO_PLAY1, DYN_MACRO_PLAY2, MACUNDO, MACREDO, XXXXXXX, IDEA_CURSV_CHNS, IDEA_CURSV_LOAD, IDEA_BARF_BACK, IDEA_BARF_FORW \
 )
 
 };
