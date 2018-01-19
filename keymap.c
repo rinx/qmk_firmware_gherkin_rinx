@@ -115,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      | Ctrl |
  * |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+-------------+------+------+------+------|
- * | Ctrl |TD_ALT|TD_GUI| Funct| Lower| Raise| Arrow|      |      | Shift|
+ * | Ctrl |  Alt |  GUI | Funct| Lower| Raise| Arrow|      |      | Shift|
  * |   Z  |   X  |   C  |   V  | Space|  BS  |   B  |   N  |   M  | Enter|
  * `---------------------------------------------------------------------'
  */
@@ -123,14 +123,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   TD(TD_Q_TAB), KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
   KC_A, KC_S, KC_D, KC_F, KC_G, \
   KC_H, KC_J, KC_K, KC_L, CTL_T(KC_SCLN), \
-  CTL_T(KC_Z), TD(TD_X_ALT), TD(TD_C_GUI), LT(_FUNCT, KC_V), LT(_LOWER, KC_SPC), \
+  CTL_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C), LT(_FUNCT, KC_V), LT(_LOWER, KC_SPC), \
   LT(_RAISE, KC_BSPC), LT(_ARROW, KC_B), KC_N, KC_M, SFT_T(KC_ENT) \
 ),
 [_RQWERTY] = RKEYMAP( \
   TD(TD_Q_TAB), KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
   KC_A, KC_S, KC_D, KC_F, KC_G, \
   KC_H, KC_J, KC_K, KC_L, CTL_T(KC_SCLN), \
-  CTL_T(KC_Z), TD(TD_X_ALT), TD(TD_C_GUI), LT(_RFUNCT, KC_V), LT(_RLOWER, KC_SPC), \
+  CTL_T(KC_Z), ALT_T(KC_X), GUI_T(KC_C), LT(_RFUNCT, KC_V), LT(_RLOWER, KC_SPC), \
   LT(_RRAISE, KC_BSPC), LT(_RARROW, KC_B), KC_N, KC_M, SFT_T(KC_ENT) \
 ),
 
@@ -206,24 +206,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Arrow
  * ,---------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |      |SPOT  |
- * | Esc  | Tab  |  Up  |      |      |      |      |      |      |LIGHT |
+ * | Esc  | Tab  |  Up  |      |      |      |      |PREVWK|NEXTWK|LIGHT |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |MISSIO|
  * |Adjust| Left | Down | Right|      | Left | Down |  Up  | Right|NCTRL |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |XXXXXX|      |      |      |
- * |M UNDO| Alt  | GUI  |M REDO|      |      |XXXXXX|      |PREVWK|NEXTWK|
+ * |M UNDO| Alt  | GUI  |M REDO|      |      |XXXXXX|  Alt |  GUI |      |
  * `---------------------------------------------------------------------'
  */
 [_ARROW] = KEYMAP( \
-  KC_ESC, KC_TAB, KC_UP, _______, _______, _______, _______, _______, _______, SPTLGHT, \
+  KC_ESC, KC_TAB, KC_UP, _______, _______, _______, _______, PREVWKS, NEXTWKS, SPTLGHT, \
   ADJUST, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, MISSIONCTL, \
-  MACUNDO, KC_LALT, KC_LGUI, MACREDO, _______, _______, _______, _______, PREVWKS, NEXTWKS \
+  MACUNDO, KC_LALT, KC_LGUI, MACREDO, _______, _______, _______, KC_LALT, KC_LGUI, _______ \
 ),
 [_RARROW] = RKEYMAP( \
-  KC_ESC, KC_TAB, KC_UP, _______, _______, _______, _______, _______, _______, SPTLGHT, \
+  KC_ESC, KC_TAB, KC_UP, _______, _______, _______, _______, PREVWKS, NEXTWKS, SPTLGHT, \
   RADJUST, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, MISSIONCTL, \
-  MACUNDO, KC_LALT, KC_LGUI, MACREDO, _______, _______, _______, _______, PREVWKS, NEXTWKS \
+  MACUNDO, KC_LALT, KC_LGUI, MACREDO, _______, _______, _______, KC_LALT, KC_LGUI, _______ \
 ),
 
 /* Adjust
