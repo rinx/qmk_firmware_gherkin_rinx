@@ -24,8 +24,8 @@ extern keymap_config_t keymap_config;
 #define _RRAISE 5
 #define _FUNCT 6
 #define _RFUNCT 7
-#define _NUMPAD 8
-#define _RNUMPAD 9
+#define _ARROW 8
+#define _RARROW 9
 #define _ADJUST 10
 #define _RADJUST 11
 #define _ADMINI 12
@@ -77,6 +77,7 @@ extern keymap_config_t keymap_config;
 enum {
     TD_Q_ESC = 0,
     TD_W_TAB = 1,
+    TD_Q_TAB,
     TD_P_SPL,
     TD_X_ALT,
     TD_C_GUI
@@ -91,8 +92,8 @@ enum custom_keycodes {
   RRAISE,
   FUNCT,
   RFUNCT,
-  NUMPAD,
-  RNUMPAD,
+  ARROW,
+  RARROW,
   ADJUST,
   RADJUST,
   ADMINI,
@@ -108,29 +109,29 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Qwerty
  * ,---------------------------------------------------------------------.
- * |TD_ESC|TD_TAB|      |      |      |      |      |      |      |SPTLGT|
+ * |TD_TAB|      |      |      |      |      |      |      |      |      |
  * |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      | Ctrl |
  * |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+-------------+------+------+------+------|
- * | Ctrl |TD_ALT|TD_GUI| Funct| Lower| Raise|Numpad|      |      | Shift|
+ * | Ctrl |TD_ALT|TD_GUI| Funct| Lower| Raise| Arrow|      |      | Shift|
  * |   Z  |   X  |   C  |   V  | Space|  BS  |   B  |   N  |   M  | Enter|
  * `---------------------------------------------------------------------'
  */
 [_QWERTY] = KEYMAP( \
-  TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, TD(TD_P_SPL), \
+  TD(TD_Q_TAB), KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
   KC_A, KC_S, KC_D, KC_F, KC_G, \
   KC_H, KC_J, KC_K, KC_L, CTL_T(KC_SCLN), \
   CTL_T(KC_Z), TD(TD_X_ALT), TD(TD_C_GUI), LT(_FUNCT, KC_V), LT(_LOWER, KC_SPC), \
-  LT(_RAISE, KC_BSPC), LT(_NUMPAD, KC_B), KC_N, KC_M, SFT_T(KC_ENT) \
+  LT(_RAISE, KC_BSPC), LT(_ARROW, KC_B), KC_N, KC_M, SFT_T(KC_ENT) \
 ),
 [_RQWERTY] = RKEYMAP( \
-  TD(TD_Q_ESC), TD(TD_W_TAB), KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, TD(TD_P_SPL), \
+  TD(TD_Q_TAB), KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
   KC_A, KC_S, KC_D, KC_F, KC_G, \
   KC_H, KC_J, KC_K, KC_L, CTL_T(KC_SCLN), \
   CTL_T(KC_Z), TD(TD_X_ALT), TD(TD_C_GUI), LT(_RFUNCT, KC_V), LT(_RLOWER, KC_SPC), \
-  LT(_RRAISE, KC_BSPC), LT(_RNUMPAD, KC_B), KC_N, KC_M, SFT_T(KC_ENT) \
+  LT(_RRAISE, KC_BSPC), LT(_RARROW, KC_B), KC_N, KC_M, SFT_T(KC_ENT) \
 ),
 
 /* Lower
@@ -141,8 +142,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      |      |
  * |   ~  |   "  |   ?  |   |  |      |      |   _  |   +  |   {  |   }  |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |      |   <  |   >  |      |
+ * |      |      |      |      |XXXXXX|      |      |      |      |      |
+ * |      |      |      |      |XXXXXX|      |      |   <  |   >  |      |
  * `---------------------------------------------------------------------'
  */
 [_LOWER] = KEYMAP( \
@@ -164,8 +165,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      |      |
  * |   `  |   '  |   /  |   \  |      |      |   -  |   =  |   [  |   ]  |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |      |   '  |   ,  |   .  |   \  |
+ * |      |      |      |      |      |XXXXXX|      |      |      |      |
+ * |      |      |      |      |      |XXXXXX|   '  |   ,  |   .  |   \  |
  * `---------------------------------------------------------------------'
  */
 [_RAISE] = KEYMAP( \
@@ -187,8 +188,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |KEYMAP|      |      |      |      |
  * | Tab  |M C/P |M COPY|MPASTE|      |   URL|DMPLY1|DMREC1|  F11 |  F12 |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      |      |      |  DEL |DMPLY2|DMREC2|DMSTOP|ADMINI|
+ * |      |      |      |XXXXXX|      |      |      |      |      |      |
+ * |      |      |      |XXXXXX|      |  DEL |DMPLY2|DMREC2|DMSTOP|ADMINI|
  * `---------------------------------------------------------------------'
  */
 [_FUNCT] = KEYMAP( \
@@ -202,27 +203,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, KC_DEL, DYN_MACRO_PLAY2, DYN_REC_START2, DYN_REC_STOP, RADMINI \
 ),
 
-/* Numpad
+/* Arrow
  * ,---------------------------------------------------------------------.
- * |      |      |      |      |      |      |      |      |      |      |
- * |      |  7   |  8   |  9   |      |      |      |  Up  |      |      |
+ * |      |      |      |      |      |      |      |      |      |SPOT  |
+ * | Esc  | Tab  |  Up  |      |      |      |      |      |      |LIGHT |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |Adjust|  4   |  5   |  6   |      |      | Left | Down | Right|      |
+ * |      |      |      |      |      |      |      |      |      |MISSIO|
+ * |Adjust| Left | Down | Right|      | Left | Down |  Up  | Right|NCTRL |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |  0   |  1   |  2   |  3   |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |XXXXXX|      |      |      |
+ * |M UNDO| Alt  | GUI  |M REDO|      |      |XXXXXX|      |PREVWK|NEXTWK|
  * `---------------------------------------------------------------------'
  */
-[_NUMPAD] = KEYMAP( \
-  _______, KC_7, KC_8, KC_9, _______, _______, _______, KC_UP, _______, _______, \
-  ADJUST, KC_4, KC_5, KC_6, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, \
-  KC_0, KC_1, KC_2, KC_3, _______, _______, _______, _______, _______, _______ \
+[_ARROW] = KEYMAP( \
+  KC_ESC, KC_TAB, KC_UP, _______, _______, _______, _______, _______, _______, SPTLGHT, \
+  ADJUST, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, MISSIONCTL, \
+  MACUNDO, KC_LALT, KC_LGUI, MACREDO, _______, _______, _______, _______, PREVWKS, NEXTWKS \
 ),
-[_RNUMPAD] = RKEYMAP( \
-  _______, KC_7, KC_8, KC_9, _______, _______, _______, KC_UP, _______, _______, \
-  RADJUST, KC_4, KC_5, KC_6, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, \
-  KC_0, KC_1, KC_2, KC_3, _______, _______, _______, _______, _______, _______ \
+[_RARROW] = RKEYMAP( \
+  KC_ESC, KC_TAB, KC_UP, _______, _______, _______, _______, _______, _______, SPTLGHT, \
+  RADJUST, KC_LEFT, KC_DOWN, KC_RGHT, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, MISSIONCTL, \
+  MACUNDO, KC_LALT, KC_LGUI, MACREDO, _______, _______, _______, _______, PREVWKS, NEXTWKS \
 ),
 
 /* Adjust
@@ -230,11 +231,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |SCREEN|      |      |      |      |
  * |      | WhDn | MsUp | WhUp |      |  BRI+| WhDn | MsUp | WhUp |Vol + |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |SCREEN|      |      |      |      |
- * |      |MsLeft|MsDown|MsRght|      |  BRI-|MsLeft|MsDown|MsRght|Vol - |
+ * |XXXXXX|      |      |      |      |SCREEN|      |      |      |      |
+ * |XXXXXX|MsLeft|MsDown|MsRght|      |  BRI-|MsLeft|MsDown|MsRght|Vol - |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      | Lclk | Rclk |      |      |      |      |Vol mt|
+ * |      |      |      |      |      |      |XXXXXX|      |      |      |
+ * |      |      |      | Lclk | Rclk |      |XXXXXX|      |      |Vol mt|
  * `---------------------------------------------------------------------'
  */
 [_ADJUST] = KEYMAP( \
@@ -256,8 +257,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      |      |
  * |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |BL_TOG|BACKLI|      |      |      |      |      |      |      |      |
+ * |      |      |      |XXXXXX|      |      |      |      |      |XXXXXX|
+ * |BL_TOG|BACKLI|      |XXXXXX|      |      |      |      |      |XXXXXX|
  * `---------------------------------------------------------------------'
  */
 [_ADMINI] = KEYMAP( \
@@ -339,6 +340,7 @@ void matrix_scan_user(void) {
 qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_Q_ESC]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC),
   [TD_W_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_W, KC_TAB),
+  [TD_Q_TAB]  = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_TAB),
   [TD_P_SPL]  = ACTION_TAP_DANCE_DOUBLE(KC_P, SPTLGHT),
   [TD_X_ALT]  = ACTION_TAP_DANCE_DOUBLE(KC_X, KC_LALT),
   [TD_C_GUI]  = ACTION_TAP_DANCE_DOUBLE(KC_C, KC_LGUI)
@@ -416,19 +418,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NUMPAD:
+    case ARROW:
       if (record->event.pressed) {
-        layer_on(_NUMPAD);
+        layer_on(_ARROW);
       } else {
-        layer_off(_NUMPAD);
+        layer_off(_ARROW);
       }
       return false;
       break;
-    case RNUMPAD:
+    case RARROW:
       if (record->event.pressed) {
-        layer_on(_RNUMPAD);
+        layer_on(_RARROW);
       } else {
-        layer_off(_RNUMPAD);
+        layer_off(_RARROW);
       }
       return false;
       break;
