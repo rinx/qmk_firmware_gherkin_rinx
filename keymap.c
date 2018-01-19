@@ -53,6 +53,9 @@ extern keymap_config_t keymap_config;
 #define NEXTAPP ACTION_MODS_KEY(MOD_LGUI, KC_TAB)
 #define PREVAPP ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_TAB)
 
+#define SCR_BR_UP KC_PAUS
+#define SCR_BR_DOWN KC_SLCK
+
 #define IDEA_O ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_O)
 #define IDEA_F ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_F)
 #define IDEA_R ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_R)
@@ -224,25 +227,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Adjust
  * ,---------------------------------------------------------------------.
- * |      |      |      |      |      |      |      |      |      |      |
- * |      | WhDn | MsUp | WhUp |      |      | WhDn | MsUp | WhUp |      |
+ * |      |      |      |      |      |SCREEN|      |      |      |      |
+ * |      | WhDn | MsUp | WhUp |      |  BRI+| WhDn | MsUp | WhUp |Vol + |
+ * |------+------+------+------+-------------+------+------+------+------|
+ * |      |      |      |      |      |SCREEN|      |      |      |      |
+ * |      |MsLeft|MsDown|MsRght|      |  BRI-|MsLeft|MsDown|MsRght|Vol - |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |
- * |      |MsLeft|MsDown|MsRght|      |      |MsLeft|MsDown|MsRght|      |
- * |------+------+------+------+-------------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |
- * |      |      |      | Lclk | Rclk |      |      |      |      |      |
+ * |      |      |      | Lclk | Rclk |      |      |      |      |Vol mt|
  * `---------------------------------------------------------------------'
  */
 [_ADJUST] = KEYMAP( \
-  _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, \
-  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, \
-  _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, _______ \
+  _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, SCR_BR_UP, KC_WH_D, KC_MS_U, KC_WH_U, KC_VOLU, \
+  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, SCR_BR_DOWN, KC_MS_L, KC_MS_D, KC_MS_R, KC_VOLD, \
+  _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, KC_MUTE \
 ),
 [_RADJUST] = RKEYMAP( \
-  _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, \
-  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, \
-  _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, _______ \
+  _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, SCR_BR_UP, KC_WH_D, KC_MS_U, KC_WH_U, KC_VOLU, \
+  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, SCR_BR_DOWN, KC_MS_L, KC_MS_D, KC_MS_R, KC_VOLD, \
+  _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, KC_MUTE \
 ),
 
 /* Admini
