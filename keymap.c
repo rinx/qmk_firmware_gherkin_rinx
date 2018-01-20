@@ -186,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |KEYMAP|      |      |      |      |
- * | Tab  |M C/P |M COPY|MPASTE|      |   URL|DMPLY1|DMREC1|  F11 |  F12 |
+ * | Tab  |M CUT |M COPY|MPASTE|M FIND|   URL|DMPLY1|DMREC1|  F11 |  F12 |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |XXXXXX|      |      |      |      |      |      |
  * |      |      |      |XXXXXX|      |  DEL |DMPLY2|DMREC2|DMSTOP|ADMINI|
@@ -194,12 +194,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_FUNCT] = KEYMAP( \
   KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
-  KC_TAB, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, M(SEND_KEYMAP_URI), DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
+  KC_TAB, MACCUT, MACCOPY, MACPASTE, MACFIND, M(SEND_KEYMAP_URI), DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
   _______, _______, _______, _______, _______, KC_DEL, DYN_MACRO_PLAY2, DYN_REC_START2, DYN_REC_STOP, ADMINI \
 ),
 [_RFUNCT] = RKEYMAP( \
   KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, \
-  KC_TAB, M(MAC_COPY_PASTE), MACCOPY, MACPASTE, _______, M(SEND_KEYMAP_URI), DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
+  KC_TAB, MACCUT, MACCOPY, MACPASTE, MACFIND, M(SEND_KEYMAP_URI), DYN_MACRO_PLAY1, DYN_REC_START1, KC_F11,  KC_F12, \
   _______, _______, _______, _______, _______, KC_DEL, DYN_MACRO_PLAY2, DYN_REC_START2, DYN_REC_STOP, RADMINI \
 ),
 
