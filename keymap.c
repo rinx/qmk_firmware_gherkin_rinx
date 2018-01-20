@@ -228,24 +228,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Adjust
  * ,---------------------------------------------------------------------.
- * |      |      |      |      |      |SCREEN|      |      |      |      |
- * |      | WhDn | MsUp | WhUp |      |  BRI+| WhDn | MsUp | WhUp |Vol + |
+ * |      |      |      |      |SCREEN|      |      |      |      |      |
+ * |      | WhDn | MsUp | WhUp |  BRI+|      |      |      |      |Vol + |
  * |------+------+------+------+-------------+------+------+------+------|
- * |XXXXXX|      |      |      |      |SCREEN|      |      |      |      |
- * |XXXXXX|MsLeft|MsDown|MsRght|      |  BRI-|MsLeft|MsDown|MsRght|Vol - |
+ * |XXXXXX|      |      |      |SCREEN|      |      |      |      |      |
+ * |XXXXXX|MsLeft|MsDown|MsRght|  BRI-|MsLeft|MsDown| MsUp |MsRght|Vol - |
  * |------+------+------+------+-------------+------+------+------+------|
  * |      |      |      |      |      |      |XXXXXX|      |      |      |
  * |      |      |      | Lclk | Rclk |      |XXXXXX|      |      |Vol mt|
  * `---------------------------------------------------------------------'
  */
 [_ADJUST] = KEYMAP( \
-  _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, SCR_BR_UP, KC_WH_D, KC_MS_U, KC_WH_U, KC_VOLU, \
-  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, SCR_BR_DOWN, KC_MS_L, KC_MS_D, KC_MS_R, KC_VOLD, \
+  _______, KC_WH_D, KC_MS_U, KC_WH_U, SCR_BR_UP, _______, _______, _______, _______, KC_VOLU, \
+  _______, KC_MS_L, KC_MS_D, KC_MS_R, SCR_BR_DOWN, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_VOLD, \
   _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, KC_MUTE \
 ),
 [_RADJUST] = RKEYMAP( \
-  _______, KC_WH_D, KC_MS_U, KC_WH_U, _______, SCR_BR_UP, KC_WH_D, KC_MS_U, KC_WH_U, KC_VOLU, \
-  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, SCR_BR_DOWN, KC_MS_L, KC_MS_D, KC_MS_R, KC_VOLD, \
+  _______, KC_WH_D, KC_MS_U, KC_WH_U, SCR_BR_UP, _______, _______, _______, _______, KC_VOLU, \
+  _______, KC_MS_L, KC_MS_D, KC_MS_R, SCR_BR_DOWN, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_VOLD, \
   _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______, KC_MUTE \
 ),
 
